@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- ======================================================================= -->
+    <style>
+        *{
+            margin: 0;
+        }
+        .background{
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg,white,rgb(81, 164, 224),rgb(8, 224, 244));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            width: 500px;
+            height: 600px;
+            background-color: rgba(252, 252, 252, 0.3);
+            border-radius: 40px;
+        }
+        .searching{
+            margin: 60px;
+
+        }
+        .inputbox{
+            width: 230px;
+            height: 60px;
+            border: none;
+            background-color: transparent;
+            border-bottom: 2px solid white;
+            font-size: 30px;
+            padding: 10px;
+            color: white;
+            outline: none;
+        }
+        .searchbtn{
+            margin: 10px;
+            width: 100px;
+            height: 60px;
+            border: none;
+            color: rgb(58, 135, 150);
+        }
+        .city{
+            /* margin-left: 200px; */
+            font-size: 30px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+        .weather{
+            /* margin-left: 230px; */
+            margin-top: 10px;
+            font-size: 25px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+        .temp{
+            margin-top: 30px;
+            font-size: 55px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+.tab{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+.max,
+.min{
+    padding: 30px;
+    color: white;
+    font-size: 30px;
+
+}
+.max{
+    border-right: 2px solid white;
+}
+@media screen and (max-width: 500px) {
+    .searchbtn{
+            margin-right: 10px;
+            width: 250px;
+            
+        }
+}
+      
+
+
+    </style>
+    <!-- ========================================================================= -->
+</head>
+<body>
+    <!-- =========================================================================== -->
+    <html>
+    <div class="background">
+        <div class="container">
+            <div class="searching">
+                <input class="inputbox" type="text">
+                <button class="searchbtn">SEARCH</button>
+            </div>
+            <div class="display">
+                <div class="city">
+               
+                </div>
+                <div class="weather">
+                    
+                </div>
+                <div class="temp">
+
+                </div>
+                <div class="tab">
+                    <div class="max">
+                        
+                                        </div>
+                    <div class="min">
+                        
+                                        </div>
+                </div>
+               
+    
+            </div>
+           
+
+        </div>
+
+    </div>
+
+
+    </html>
+      <!-- =========================================================================== -->
+      <script>
+       let input= document.querySelector(".inputbox")
+        let searchbtn = document.querySelector('.searchbtn')
+        let city = document.querySelector('.city')
+        let weather = document.querySelector('.weather')
+        let temp = document.querySelector('.temp')
+        let max = document.querySelector('.max')
+        let min = document.querySelector('.min')
+        
+        searchbtn.addEventListener('click',(e)=>{
+            let valuee =  input.value
+            getting(valuee,key)
+        })
+
+
+        value = 'madurai'
+        key = "1a76844e0054af761d6d9c8328e90132"
+
+        async function getting(value,key){
+        
+      let fetching =  await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${value}&appid=${key}`)
+     let convertedintojson = await fetching.json()
+            city.innerHTML =  convertedintojson.name
+            weather.innerHTML = convertedintojson.weather[0].main
+            temp.innerHTML = `${parseInt((convertedintojson.main.temp)-273)}C`
+            max.innerHTML = `Max ${parseInt((convertedintojson.main.temp_max)-273)}C`
+            
+            min.innerHTML = `Min ${parseInt((convertedintojson.main.temp_min)-273)}C`
+    //  console.log(convertedintojson)
+
+    
+        }
+
+       
+    </script>
+   
+      <!-- =========================================================================== -->
+    
+</body>
+</html>
